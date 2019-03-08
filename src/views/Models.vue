@@ -77,6 +77,7 @@ import model_load from '@/assets/js/models/model_load.js'
 import feature_main from '@/assets/js/models/custom/feature.js'
 import component_main from '@/assets/js/models/custom/component.js'
 import binding_feature_component_main from '@/assets/js/models/custom/binding_feature_component.js'
+import deployment_main from '@/assets/js/models/custom/deployment.js'
 
 /* import actions */
 import DomainImplementation from '../components/model_actions/DomainImplementation'
@@ -110,7 +111,9 @@ export default{
     this.modelFunctions = {
       "feature":feature_main,
       "component":component_main,
-      "binding_feature_component":binding_feature_component_main
+      "binding_feature_component":binding_feature_component_main,
+      "deployment":deployment_main
+
     }
     this.setupFunctions = {
       "setup_relations":setup_relations,
