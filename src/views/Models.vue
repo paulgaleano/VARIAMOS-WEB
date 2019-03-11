@@ -107,7 +107,7 @@ export default{
     Verification
   },
   mounted: function(){
-    this.models = ["feature","component","binding_feature_component"]; //represent the available models
+    this.models = ["feature","component","binding_feature_component","deployment"]; //represent the available models
     this.modelFunctions = {
       "feature":feature_main,
       "component":component_main,

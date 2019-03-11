@@ -5,44 +5,44 @@ var deployment_main = function deployment_main(graph)
 	data[0]="normal" //custom type
 	data[1]=deployment_elements(); //custom elements
 	data[2]=deployment_attributes(); //custom attributes
-	data[3]=deployment_relations(); //custom relations
-	data[4]=deployment_properties_styles(); //custom properties styles
-	data[5]=deployment_labels(); //custom labels
-	data[6]=deployment_clon_cells(); //custom clon cells
-	data[7]=deployment_constraints_in_creation(); //custom constraints in element creation
-	data[8]=deployment_overlay(); //custom constraints in element creation
+	data[3]=null; //custom relations
+	data[4]=null; //custom properties styles
+	data[5]=null; //custom labels
+	data[6]=deployment_clon_cells();//custom clon cells
+	data[7]=null;//custom constraints in element creation
+	data[8]=null; //custom constraints in element creation
 	return data;
 	
 	function deployment_constraints(graph){
 		graph.multiplicities=[]; //reset multiplicities
-		graph.multiplicities.push(new mxMultiplicity(
+		/*graph.multiplicities.push(new mxMultiplicity(
 			true, "root", null, null, 0, 0, null,
 			"Invalid connection",
 			"Only shape targets allowed"));
 		graph.multiplicities.push(new mxMultiplicity(
 			true, "bundle", null, null, 0, 1, ["root","general"],
-			"Only 1 target allowed",
-			"Only shape targets allowed"));
+			"Only 1 target allowed",	
+			"Only shape targets allowed"));*/
 	}
 
 	function deployment_elements(){
-		var root = {src:projectPath+"images/models/deployment/rectangle.png", wd:100, hg:35, type:"root", style:"", pname:"Root deployment"};
-		var general = {src:projectPath+"images/models/deployment/rectangle.png", wd:100, hg:35, type:"general", style:"", pname:"General deployment"};
+		var deployedTarget = {src:projectPath+"images/models/deployment/target.png", wd:50, hg:35, type:"target", style:"shape=target", pname:"target"};
+		/*var general = {src:projectPath+"images/models/deployment/rectangle.png", wd:100, hg:35, type:"general", style:"", pname:"General deployment"};
 		var leaf = {src:projectPath+"images/models/deployment/rectangle.png", wd:100, hg:35, type:"leaf", style:"", pname:"Leaf deployment"};
-		var bundle = {src:projectPath+"images/models/deployment/bundle.png", wd:35, hg:35, type:"bundle", style:"shape=ellipse", pname:"Bundle"};
+		var bundle = {src:projectPath+"images/models/deployment/bundle.png", wd:35, hg:35, type:"bundle", style:"shape=ellipse", pname:"Bundle"};*/
 		
 		var elements=[];
-		elements[0]=root;
-		elements[1]=general;
+		elements[0]=deployedTarget;
+		/*elements[1]=general;
 		elements[2]=leaf;
-		elements[3]=bundle;
+		elements[3]=bundle;*/
 		
 		return elements;
 	}
 
 	function deployment_attributes(){
 		var attributes=[];
-		attributes[0]={
+		/*attributes[0]={
 			"types":["bundle"],
 			"custom_attributes":[{
 				"name":"bundleType",
@@ -64,13 +64,13 @@ var deployment_main = function deployment_main(graph)
 				"def_value":"false"
 			}]
 
-		};
+		};*/
 		return attributes;
 	}
 
 	function deployment_relations(){
 		var relations=[];
-		relations[0]={
+		/*relations[0]={
 			"source":["general","leaf"],
 			"rel_source_target":"and",
 			"target":["general","leaf","root"],
@@ -78,14 +78,14 @@ var deployment_main = function deployment_main(graph)
 				"name":"relType",
 				"def_value":"mandatory"
 			}]
-		}
+		}*/
 	
 		return relations;
 	}
 
 	function deployment_properties_styles(){
 		var styles={};
-		styles={
+		/*styles={
 			"leaf":[{
 					"attribute":"selected",
 					"input_type":"checkbox",
@@ -126,7 +126,7 @@ var deployment_main = function deployment_main(graph)
 					"onchangerestrictive": deployment_custom_methods(1)
 				}
 			]
-		}
+		}*/
 
 		return styles;
 	}
@@ -188,9 +188,9 @@ var deployment_main = function deployment_main(graph)
 
 	function deployment_constraints_in_creation(){
 		var constraints_ic={};
-		constraints_ic={
+		/*constraints_ic={
 			"root":deployment_custom_methods(2)
-		};
+		};*/
 
 		return constraints_ic;
 	}
@@ -198,7 +198,7 @@ var deployment_main = function deployment_main(graph)
 	function deployment_clon_cells(){
 		var clons={};
 		clons={
-			"leaf":"binding_deployment_component"
+			"deployment":"deployment"
 		};
 
 		return clons;
