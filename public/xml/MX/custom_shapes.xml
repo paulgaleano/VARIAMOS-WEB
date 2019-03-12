@@ -65,17 +65,25 @@
 <shape name="target" aspect="variable">
 	<background>
 		<path>
-			<move x="15" y="0"/>
-			<line x="100" y="0"/>
+			dy=100
+			dx=100
+
+			<move x="0" y="100"/>
 			<line x="100" y="100"/>
-			<line x="15" y="100"/>
-			<line x="15" y="0"/>
+			<line x="200" y="0"/>
+			<move x="100" y="100"/>
+			<line x="100" y="20"/>
+			
+			
+			<line x="100" y="0"/>
+			<!--line x="200" y="0"/>
+			<line x="200" y="-80"/>
+			<line x="100" y="20"/>
+			<line x="0" y="20"/>
+			<line x="0" y="100"/>
+			<line x="100" y="0"/-->
 			<close/>
-			<move x="15" y="0"/>
-			<line x="50" y="-20"/>
-			<move x="15" y="0"/>
-			<line x="50" y="-20"/>
-			<close/>
+			
 			<!--line x="30" y="40"/>
 			<line x="0" y="40"/>
 			<line x="0" y="25"/>
