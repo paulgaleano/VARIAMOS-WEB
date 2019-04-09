@@ -45,6 +45,9 @@ var setup_properties = function setup_properties(graph,properties_styles){
 									}else if(properties_styles[type][j]["input_type"]=="select"){
 										createSelectField(graph, form, cell, attrs[i], properties_styles[type][j]);
 										passed = true;
+									} else if (properties_styles[type][j]["input_type"] == "selectRelationType") {
+										createRelationTypeSelectField(graph, form, cell, attrs[i], properties_styles[type][j]);
+										passed = true;
 									}else if(properties_styles[type][j]["input_type"]=="checkbox"){
 										createCheckboxField(graph, form, cell, attrs[i], properties_styles[type][j]);
 										passed = true;
@@ -96,6 +99,26 @@ var setup_properties = function setup_properties(graph,properties_styles){
 		}
 
 		executeApplyHandler(graph, form, cell, attribute, input, custom);
+	}
+
+
+	function createRelationTypeSelectField(graph, form, cell, attribute, custom) {
+		var values = custom["input_values"];
+		var def_display = getDisplayValue(cell, custom);
+		var input = form.addCombo(attribute.nodeName, false, 1, def_display);
+
+		form.addOption(input, "standard", "standard", true);
+
+
+		for (var i = 0; i < values.length; i++) {
+			if (values[i] == attribute.nodeValue) {
+				form.addOption(input, values[i].toLowerCase(), values[i], true);
+			} else {
+				form.addOption(input, values[i].toLowerCase(), values[i], false);
+			}
+		}
+
+		executeApplyRelationTypeHandler(graph, form, cell, attribute, input, custom);
 	}
 
 	/**
@@ -195,6 +218,76 @@ var setup_properties = function setup_properties(graph,properties_styles){
 			// that stores the focused field and invoke blur
 			// explicitely where we do the graph.focus above.
 			mxEvent.addListener(input, 'blur', applyHandler);
+		}
+	}
+
+	function executeApplyRelationTypeHandler(graph, form, cell, attribute, input, custom) {
+		
+		var cell = graph.getSelectionCell();
+		
+
+
+		let idParts = cell.id.split("@");
+
+		if (idParts.length == 1) {
+			input.value = "standard";
+		} else if (idParts.length == 2) {
+			if (idParts[1]!=""){
+				input.value = idParts[1];	
+			}
+		}
+
+		var applyHandler = function (evt) {
+			var inputValue = input.value;
+
+			var styles = custom.input_values_styles[inputValue];
+
+			var cell = graph.getSelectionCell();
+			
+			let idParts = cell.id.split("@");
+			
+			if ( idParts.length ==1 ) {
+				cell.setId(cell.id + "@" + inputValue);
+			} else if (idParts.length == 2) {
+				cell.setId(idParts[0] + "@" + inputValue);
+			}
+			
+			var newStyles=[];
+
+			if (styles!=null) {
+				for (var i = 0; i < styles.length; i++) {
+					newStyles.push(styles[i].key + "=" + styles[i].value);
+				}
+			}
+			
+			newStyles = newStyles == [] ? "" : newStyles.join(";");
+
+			console.log(cell.id);
+
+			cell.setStyle(newStyles);
+			graph.refresh();
+			
+		};
+
+		mxEvent.addListener(input, 'keypress', function (evt) {
+			// Needs to take shift into account for textareas
+			if (evt.keyCode == /*enter*/ 13 &&
+				!mxEvent.isShiftDown(evt)) {
+				input.blur();
+			}
+		});
+
+		if (mxClient.IS_IE) {
+			mxEvent.addListener(input, 'focusout', applyHandler);
+		} else {
+			// Note: Known problem is the blurring of fields in
+			// Firefox by changing the selection, in which case
+			// no event is fired in FF and the change is lost.
+			// As a workaround you should use a local variable
+			// that stores the focused field and invoke blur
+			// explicitely where we do the graph.focus above.
+			mxEvent.addListener(input, 'blur', applyHandler);
+			mxEvent.addListener(input, 'change', applyHandler);
 		}
 	}
 

@@ -87,8 +87,32 @@
 		</path>		
 	</background>
 	<foreground>
-		<fillstroke/>
+		<stroke/>
 	</foreground>
 </shape>
+
+<shape name="relation" aspect="variable">
+	<background>
+		<path>
+			<move x="0" y="0"/>
+			<line x="20" y="-20"/>
+			<line x="40" y="0"/>
+			<line x="20" y="20"/>
+			<line x="0" y="0"/>
+
+			<move x="40" y="0"/>
+			<line x="400" y="0"/>
+
+			<line x="380" y="-20"/>
+			<move x="400" y="0"/>
+
+			<line x="380" y="20"/>
+		</path>		
+	</background>
+	<foreground>
+		<stroke/>
+	</foreground>
+</shape>
+
 <!-- end component model -->
 </shapes>

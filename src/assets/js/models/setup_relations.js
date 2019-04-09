@@ -35,17 +35,6 @@ var setup_relations = function setup_relations(graph,relations){
             }
         }
         
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_ROUNDED] = true;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_ORTHOGONAL] = false;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_EDGE] = "elbowEdgeStyle";
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_CONNECTOR;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_STARTARROW] = mxConstants.ARROW_DIAMOND;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_ENDARROW] = mxConstants.ARROW_CLASSIC;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_VERTICAL_ALIGN] = mxConstants.ALIGN_MIDDLE;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_ALIGN] = mxConstants.ALIGN_CENTER;
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_STROKECOLOR] = "#000000"; // default is #6482B9
-        graph.getStylesheet().getDefaultEdgeStyle()[mxConstants.STYLE_FONTCOLOR] = "#446299";
-
         var cell = graph.insertEdge(parent, id, node, source, target, style);
         return cell;
     };
